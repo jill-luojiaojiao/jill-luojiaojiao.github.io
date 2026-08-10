@@ -11,103 +11,105 @@
       font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
       background: #f6f3ee;
       color: #111;
+      overflow-x: hidden;
     }
 
     header {
-      padding: 46px 6vw 20px;
+      padding: 34px 6vw 10px;
     }
 
     .back {
       display: inline-block;
-      margin-bottom: 34px;
+      margin-bottom: 24px;
       font-size: 14px;
       color: #666;
       text-decoration: none;
     }
 
     h1 {
-      margin: 0 0 12px;
-      font-size: 42px;
+      margin: 0 0 10px;
+      font-size: 38px;
       letter-spacing: -1px;
     }
 
     .meta {
       color: #777;
-      font-size: 16px;
-      margin-bottom: 22px;
+      font-size: 15px;
+      margin-bottom: 14px;
     }
 
     .intro {
-      max-width: 760px;
-      font-size: 17px;
-      line-height: 1.8;
+      max-width: 720px;
+      font-size: 16px;
+      line-height: 1.7;
       color: #444;
+      margin: 0;
     }
 
     .carousel-section {
       position: relative;
-      padding: 34px 0 90px;
+      padding: 18px 0 48px;
     }
 
     .carousel {
-  display: flex;
-  gap: 28px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  padding: 24px 20vw 42px;
-  scrollbar-width: none;
-  align-items: center;
-}
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 34px 20vw 34px;
+      scrollbar-width: none;
+    }
 
     .carousel::-webkit-scrollbar {
       display: none;
     }
 
     .slide {
-  flex: 0 0 52vw;
-  height: 68vh;
-  scroll-snap-align: center;
-  border-radius: 24px;
-  overflow: hidden;
-  background: #fff;
-  transform: scale(0.82);
-  opacity: 0.5;
-  transition: transform 0.35s ease, opacity 0.35s ease, box-shadow 0.35s ease;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.10);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+      flex: 0 0 52vw;
+      height: 64vh;
+      scroll-snap-align: center;
+      border-radius: 24px;
+      background: #fff;
+      overflow: hidden;
+      transform: scale(0.78);
+      opacity: 0.45;
+      transition: transform 0.35s ease, opacity 0.35s ease, box-shadow 0.35s ease;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     .slide.active {
       transform: scale(1);
       opacity: 1;
-      box-shadow: 0 26px 70px rgba(0,0,0,0.22);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.22);
       z-index: 2;
     }
 
     .slide img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  display: block;
-  object-fit: contain;
-}
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
 
     .nav-btn {
       position: fixed;
-      top: 50%;
+      top: 55%;
       transform: translateY(-50%);
       width: 52px;
       height: 52px;
       border-radius: 50%;
       border: none;
-      background: rgba(255,255,255,0.86);
+      background: rgba(255,255,255,0.88);
       box-shadow: 0 10px 30px rgba(0,0,0,0.16);
       cursor: pointer;
-      font-size: 28px;
+      font-size: 30px;
       color: #222;
       z-index: 10;
       backdrop-filter: blur(10px);
@@ -132,37 +134,41 @@
     }
 
     @media (max-width: 800px) {
-      h1 {
-        font-size: 30px;
+      header {
+        padding: 28px 6vw 8px;
       }
 
-      header {
-        padding: 34px 6vw 10px;
+      h1 {
+        font-size: 28px;
+      }
+
+      .intro {
+        font-size: 14px;
       }
 
       .carousel {
-        padding: 28px 7vw 42px;
-        gap: 20px;
+        gap: 18px;
+        padding: 24px 9vw 30px;
       }
 
       .slide {
-  flex-basis: 78vw;
-  height: 62vh;
-  border-radius: 18px;
-}
+        flex-basis: 82vw;
+        height: 62vh;
+        border-radius: 18px;
+      }
 
       .nav-btn {
-        width: 44px;
-        height: 44px;
+        width: 42px;
+        height: 42px;
         font-size: 24px;
       }
 
       .prev {
-        left: 12px;
+        left: 10px;
       }
 
       .next {
-        right: 12px;
+        right: 10px;
       }
     }
   </style>
@@ -190,45 +196,49 @@
     <button class="nav-btn prev" onclick="scrollCarousel(-1)">‹</button>
     <button class="nav-btn next" onclick="scrollCarousel(1)">›</button>
 
-    <div class="slide active">
-  <img src="../work-images/destinationkit/page-01.jpg" alt="Page 01">
-</div>
+    <div class="carousel" id="carousel">
 
-<div class="slide">
-  <img src="../work-images/destinationkit/page-02.jpg" alt="Page 02">
-</div>
+      <div class="slide active">
+        <img src="../work-images/destinationkit/page-01.jpg" alt="Page 01">
+      </div>
 
-<div class="slide">
-  <img src="../work-images/destinationkit/page-03.jpg" alt="Page 03">
-</div>
+      <div class="slide">
+        <img src="../work-images/destinationkit/page-02.jpg" alt="Page 02">
+      </div>
 
-<div class="slide">
-  <img src="../work-images/destinationkit/page-04.jpg" alt="Page 04">
-</div>
+      <div class="slide">
+        <img src="../work-images/destinationkit/page-03.jpg" alt="Page 03">
+      </div>
 
-<div class="slide">
-  <img src="../work-images/destinationkit/page-05.jpg" alt="Page 05">
-</div>
+      <div class="slide">
+        <img src="../work-images/destinationkit/page-04.jpg" alt="Page 04">
+      </div>
 
-<div class="slide">
-  <img src="../work-images/destinationkit/page-06.jpg" alt="Page 06">
-</div>
+      <div class="slide">
+        <img src="../work-images/destinationkit/page-05.jpg" alt="Page 05">
+      </div>
 
-<div class="slide">
-  <img src="../work-images/destinationkit/page-07.jpg" alt="Page 07">
-</div>
+      <div class="slide">
+        <img src="../work-images/destinationkit/page-06.jpg" alt="Page 06">
+      </div>
 
-<div class="slide">
-  <img src="../work-images/destinationkit/page-08.jpg" alt="Page 08">
-</div>
+      <div class="slide">
+        <img src="../work-images/destinationkit/page-07.jpg" alt="Page 07">
+      </div>
 
-<div class="slide">
-  <img src="../work-images/destinationkit/page-09.jpg" alt="Page 09">
-</div>
+      <div class="slide">
+        <img src="../work-images/destinationkit/page-08.jpg" alt="Page 08">
+      </div>
 
-<div class="slide">
-  <img src="../work-images/destinationkit/page-10.jpg" alt="Page 10">
-</div>
+      <div class="slide">
+        <img src="../work-images/destinationkit/page-09.jpg" alt="Page 09">
+      </div>
+
+      <div class="slide">
+        <img src="../work-images/destinationkit/page-10.jpg" alt="Page 10">
+      </div>
+
+    </div>
 
     <div class="page-hint">
       Click arrows or swipe horizontally to view more pages.
