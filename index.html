@@ -38,13 +38,22 @@
 }
 
     .item {
-      break-inside: avoid;
-      margin-bottom: 24px;
-      background: #fff;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-    }
+  break-inside: avoid;
+  margin-bottom: 24px;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 42px rgba(0,0,0,0.13);
+}
 
     .item img {
       width: 100%;
@@ -84,10 +93,10 @@
 
   <main class="gallery">
 
-  <div class="item">
-    <img src="images/destinationkit.jpg" alt="Destination Travel Guide Media Kit" loading="lazy">
-    <div class="caption">Destination Travel Guide / Media Kit</div>
-  </div>
+  <a class="item" href="works/destinationkit.html">
+  <img src="images/destinationkit.jpg" alt="Destination Travel Guide Media Kit" loading="lazy">
+  <div class="caption">Destination Travel Guide / Media Kit</div>
+</a>
 
   <div class="item">
     <img src="images/micekit.jpg" alt="MICE Media Kit" loading="lazy">
