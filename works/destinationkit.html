@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destination Travel Guide</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f6f3ee;
+      color: #111;
+    }
+
+    header {
+      padding: 46px 6vw 20px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 34px;
+      font-size: 14px;
+      color: #666;
+      text-decoration: none;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 42px;
+      letter-spacing: -1px;
+    }
+
+    .meta {
+      color: #777;
+      font-size: 16px;
+      margin-bottom: 22px;
+    }
+
+    .intro {
+      max-width: 760px;
+      font-size: 17px;
+      line-height: 1.8;
+      color: #444;
+    }
+
+    .carousel-section {
+      position: relative;
+      padding: 34px 0 90px;
+    }
+
+    .carousel {
+      display: flex;
+      gap: 34px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 42px 18vw 56px;
+      scrollbar-width: none;
+    }
+
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .slide {
+      flex: 0 0 58vw;
+      scroll-snap-align: center;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #fff;
+      transform: scale(0.82);
+      opacity: 0.5;
+      transition: transform 0.35s ease, opacity 0.35s ease, box-shadow 0.35s ease;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.10);
+    }
+
+    .slide.active {
+      transform: scale(1);
+      opacity: 1;
+      box-shadow: 0 26px 70px rgba(0,0,0,0.22);
+      z-index: 2;
+    }
+
+    .slide img {
+      width: 100%;
+      display: block;
+    }
+
+    .nav-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.86);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.16);
+      cursor: pointer;
+      font-size: 28px;
+      color: #222;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-btn:hover {
+      background: #fff;
+    }
+
+    .prev {
+      left: 28px;
+    }
+
+    .next {
+      right: 28px;
+    }
+
+    .page-hint {
+      text-align: center;
+      color: #888;
+      font-size: 14px;
+    }
+
+    @media (max-width: 800px) {
+      h1 {
+        font-size: 30px;
+      }
+
+      header {
+        padding: 34px 6vw 10px;
+      }
+
+      .carousel {
+        padding: 28px 7vw 42px;
+        gap: 20px;
+      }
+
+      .slide {
+        flex-basis: 82vw;
+        border-radius: 18px;
+      }
+
+      .nav-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 24px;
+      }
+
+      .prev {
+        left: 12px;
+      }
+
+      .next {
+        right: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a class="back" href="../index.html">← Back to Works</a>
+
+    <h1>Destination Travel Guide</h1>
+
+    <div class="meta">
+      Media Kit / Editorial Design / Travel Visual
+    </div>
+
+    <p class="intro">
+      A selected editorial design project focusing on layout rhythm, visual hierarchy,
+      image composition, and commercial presentation.
+    </p>
+  </header>
+
+  <main class="carousel-section">
+
+    <button class="nav-btn prev" onclick="scrollCarousel(-1)">‹</button>
+    <button class="nav-btn next" onclick="scrollCarousel(1)">›</button>
+
+    <div class="carousel" id="carousel">
+
+      <div class="slide active">
+        <img src="../work-images/destinationkit/page-01.jpg" alt="Page 01">
+      </div>
+
+      <div class="slide">
+        <img src="../work-images/destinationkit/page-02.jpg" alt="Page 02">
+      </div>
+
+      <div class="slide">
+        <img src="../work-images/destinationkit/page-03.jpg" alt="Page 03">
+      </div>
+
+      <div class="slide">
+        <img src="../work-images/destinationkit/page-04.jpg" alt="Page 04">
+      </div>
+
+    </div>
+
+    <div class="page-hint">
+      Click arrows or swipe horizontally to view more pages.
+    </div>
+
+  </main>
+
+  <script>
+    const carousel = document.getElementById('carousel');
+    const slides = Array.from(document.querySelectorAll('.slide'));
+
+    function updateActiveSlide() {
+      const carouselCenter = carousel.scrollLeft + carousel.offsetWidth / 2;
+
+      let closestSlide = slides[0];
+      let closestDistance = Infinity;
+
+      slides.forEach(slide => {
+        const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+        const distance = Math.abs(carouselCenter - slideCenter);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestSlide = slide;
+        }
+      });
+
+      slides.forEach(slide => slide.classList.remove('active'));
+      closestSlide.classList.add('active');
+    }
+
+    function scrollCarousel(direction) {
+      const activeIndex = slides.findIndex(slide => slide.classList.contains('active'));
+      let nextIndex = activeIndex + direction;
+
+      if (nextIndex < 0) {
+        nextIndex = 0;
+      }
+
+      if (nextIndex > slides.length - 1) {
+        nextIndex = slides.length - 1;
+      }
+
+      slides[nextIndex].scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest'
+      });
+    }
+
+    carousel.addEventListener('scroll', () => {
+      window.requestAnimationFrame(updateActiveSlide);
+    });
+
+    window.addEventListener('load', updateActiveSlide);
+    window.addEventListener('resize', updateActiveSlide);
+  </script>
+
+</body>
+</html>
