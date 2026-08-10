@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haidilao Campaign Visual</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f6f3ee;
+      color: #111;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 34px 6vw 10px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 24px;
+      font-size: 14px;
+      color: #666;
+      text-decoration: none;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 38px;
+      letter-spacing: -1px;
+    }
+
+    .meta {
+      color: #777;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+
+    .intro {
+      max-width: 720px;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #444;
+      margin: 0;
+    }
+
+    .carousel-section {
+      position: relative;
+      padding: 18px 0 48px;
+    }
+
+    .carousel {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 34px 20vw 34px;
+      scrollbar-width: none;
+    }
+
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .slide {
+      flex: 0 0 52vw;
+      height: 64vh;
+      scroll-snap-align: center;
+      border-radius: 24px;
+      background: transparent;
+      overflow: visible;
+      transform: scale(0.78);
+      opacity: 0.45;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+      box-shadow: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide.active {
+      transform: scale(1);
+      opacity: 1;
+      box-shadow: none;
+      z-index: 2;
+    }
+
+    .slide img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      border-radius: 18px;
+      filter: drop-shadow(0 18px 38px rgba(0,0,0,0.18));
+    }
+
+    .nav-btn {
+      position: fixed;
+      top: 55%;
+      transform: translateY(-50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.88);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.16);
+      cursor: pointer;
+      font-size: 30px;
+      color: #222;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-btn:hover {
+      background: #fff;
+    }
+
+    .prev {
+      left: 28px;
+    }
+
+    .next {
+      right: 28px;
+    }
+
+    .page-hint {
+      text-align: center;
+      color: #888;
+      font-size: 14px;
+    }
+
+    @media (max-width: 800px) {
+      header {
+        padding: 28px 6vw 8px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .intro {
+        font-size: 14px;
+      }
+
+      .carousel {
+        gap: 18px;
+        padding: 24px 9vw 30px;
+      }
+
+      .slide {
+        flex-basis: 82vw;
+        height: 62vh;
+        border-radius: 18px;
+      }
+
+      .nav-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 24px;
+      }
+
+      .prev {
+        left: 10px;
+      }
+
+      .next {
+        right: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a class="back" href="../index.html">← Back to Works</a>
+
+    <h1>Haidilao</h1>
+
+    <div class="meta">
+      Campaign Visual / Brand Visual / Layout Design
+    </div>
+
+    <p class="intro">
+      A selected visual design project for Haidilao, focusing on commercial campaign communication,
+      brand atmosphere, layout rhythm, and digital visual presentation.
+    </p>
+  </header>
+
+  <main class="carousel-section">
+
+    <button class="nav-btn prev" onclick="scrollCarousel(-1)">‹</button>
+    <button class="nav-btn next" onclick="scrollCarousel(1)">›</button>
+
+    <div class="carousel" id="carousel">
+
+      <div class="slide active">
+        <img src="../work-images/hidilao1/page-01.jpg" alt="Page 01">
+      </div>
+
+      <div class="slide">
+        <img src="../work-images/hidilao1/page-02.jpg" alt="Page 02">
+      </div>
+
+      <div class="slide">
+        <img src="../work-images/hidilao1/page-03.jpg" alt="Page 03">
+      </div>
+
+      <div class="slide">
+        <img src="../work-images/hidilao1/page-04.jpg" alt="Page 04">
+      </div>
+
+      <div class="slide">
+        <img src="../work-images/hidilao1/page-05.jpg" alt="Page 05">
+      </div>
+
+      <div class="slide">
+        <img src="../work-images/hidilao1/page-06.jpg" alt="Page 06">
+      </div>
+
+    </div>
+
+    <div class="page-hint">
+      Click arrows or swipe horizontally to view more pages.
+    </div>
+
+  </main>
+
+  <script>
+    const carousel = document.getElementById('carousel');
+    const slides = Array.from(document.querySelectorAll('.slide'));
+
+    function updateActiveSlide() {
+      const carouselCenter = carousel.scrollLeft + carousel.offsetWidth / 2;
+
+      let closestSlide = slides[0];
+      let closestDistance = Infinity;
+
+      slides.forEach(slide => {
+        const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+        const distance = Math.abs(carouselCenter - slideCenter);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestSlide = slide;
+        }
+      });
+
+      slides.forEach(slide => slide.classList.remove('active'));
+      closestSlide.classList.add('active');
+    }
+
+    function scrollCarousel(direction) {
+      const activeIndex = slides.findIndex(slide => slide.classList.contains('active'));
+      let nextIndex = activeIndex + direction;
+
+      if (nextIndex < 0) {
+        nextIndex = 0;
+      }
+
+      if (nextIndex > slides.length - 1) {
+        nextIndex = slides.length - 1;
+      }
+
+      slides[nextIndex].scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest'
+      });
+    }
+
+    carousel.addEventListener('scroll', () => {
+      window.requestAnimationFrame(updateActiveSlide);
+    });
+
+    window.addEventListener('load', updateActiveSlide);
+    window.addEventListener('resize', updateActiveSlide);
+  </script>
+
+</body>
+</html>
